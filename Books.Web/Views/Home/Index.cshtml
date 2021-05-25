@@ -1,0 +1,45 @@
+﻿@model Books.Web.ViewModels.HomeIndexViewModel
+<h2>Verlagsübersicht</h2>
+<h4>Verlag mit den meisten Büchern: @Model.TopPublisher?.Name</h4>
+<form asp-action="Index">
+    <h3>Anzahl Bücher filtern:</h3>
+    <div>
+        <label asp-for="FilterFrom"></label>
+        <input asp-for="FilterFrom" />
+        <label asp-for="FilterTo"></label>
+        <input asp-for="FilterTo" />
+        <input type="submit" value="Filtern" />
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(m => m.Publishers[0].Name)
+            </th>
+            <th>
+                Anzahl Bücher
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pub in Model.Publishers)
+        {
+            <tr>
+                <td>
+                    @pub.Name
+                </td>
+                <td>
+                    @pub.BookCnt
+                </td>
+                <td>
+                    <a asp-controller="Books" asp-action="ListByPublisher" asp-route-SelectedPubId="@pub.Id">Bücher anzeigen</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

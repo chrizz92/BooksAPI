@@ -1,0 +1,28 @@
+﻿@model Books.Web.ViewModels.BooksCreateViewModel
+
+<h2>Neues Buch anlegen:</h2>
+
+<form asp-action="Create">
+    <div class="form-group ">
+        <label asp-for="Book.Title"></label>
+        <input type="text" asp-for="Book.Title" class="form-control" />
+        <span asp-validation-for="Book.Title" ></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Book.Authors"></label>
+        <input type="text" asp-for="Book.Authors" class="form-control" />
+        <span asp-validation-for="Book.Authors"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Book.Isbn"></label>
+        <input type="text" asp-for="Book.Isbn" class="form-control" />
+        <span asp-validation-for="Book.Isbn"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Book.Publisher"></label>
+        <select asp-for="Book.Publisher_Id" asp-items="@Model.PublisherList" class="form-control"></select>
+        <span asp-validation-for="Book.Publisher_Id"></span>
+    </div>
+
+    <input type="submit" value="Speichern" />
+</form>

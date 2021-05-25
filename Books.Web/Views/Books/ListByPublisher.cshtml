@@ -1,0 +1,63 @@
+﻿@model Books.Web.ViewModels.BooksListByPublisherViewModel
+
+@{
+    ViewBag.Title = "Bücher";
+    Layout = "_Layout";
+}
+
+<h2>Bücher</h2>
+
+<a asp-action="Create" asp-route-PublisherId="@Model.SelectedPubId">Buch anlegen</a>
+
+<form method="post" asp-action="ListByPublisher">
+    <div class="form-group">
+        <label>Verlag ändern:</label>
+        <select asp-for="SelectedPubId" asp-items="@Model.PublisherList"></select>
+        <button type="submit" class="btn btn-primary">Verlag wechseln</button>
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th class="col-md-3">
+            @Html.DisplayNameFor(m => m.Books[0].Title)
+        </th>
+        <th class="col-md-3">
+            @Html.DisplayNameFor(m => m.Books[0].Authors)
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayNameFor(m => m.Books[0].Isbn)
+        </th>
+        <th class="col-md-2">
+            @Html.DisplayNameFor(m => m.Books[0].Publisher)
+        </th>
+        <th class="col-md-1"></th>
+    </tr>
+    @foreach (var book in Model.Books)
+    {
+        <tr>
+            <td>
+                <span>@book.Title</span>
+            </td>
+            <td>
+                <span>@book.Authors</span>
+            </td>
+            <td>
+                <span>@book.Isbn</span>
+            </td>
+            <td>
+                <span>@book.Publisher.Name</span>
+            </td>
+            <td class="actions">
+                <a asp-action="DeleteBook" asp-route-id="@book.Id">
+                    Delete
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+
+
